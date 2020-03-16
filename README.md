@@ -7,8 +7,12 @@ author: Christian Gil
 Install dependencies:
 
     composer install
-
-Make migrations:
-
-    php artisan migrate
     
+Install autoload:
+
+    composer dump-autoload
+    
+Populate database:
+
+    php artisan migrate:refresh --seed
+
