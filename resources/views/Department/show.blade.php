@@ -11,6 +11,15 @@
                     <ul class="list">
                         <li><strong>Department name:</strong> {{$department->name}}</li>
                         <li><strong>Description:</strong> {{$department->description}}</li>
+                        <li><strong>Users:</strong>
+                            <ul>
+                                @foreach($department->users->all() as $user)
+                                    @if($user)
+                                        <li><strong>{{$user->name}}:</strong> {{$user->work_position}}</li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="panel-footer">
