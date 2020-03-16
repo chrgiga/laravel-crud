@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-2 col-md-offset-5">
                             <a href="{{ route('users.index') }}"
-                               class="btn btn-info btn-block" >Go to home</a>
+                               class="btn btn-info btn-block" >Go to users list</a>
                         </div>
                     </div>
                 </div>
