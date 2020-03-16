@@ -58,11 +58,25 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6 col-md-offset-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <textarea name="work_functions"
                                                   class="form-control input-sm"
                                                   placeholder="Work functions"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select name="departments[]"
+                                                multiple
+                                                class="form-control input-sm"
+                                                placeholder="Departments">
+                                            @foreach($departmentOptions as $option)
+                                                <option value="{{$option->value}}">
+                                                    {{$option->text}}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>

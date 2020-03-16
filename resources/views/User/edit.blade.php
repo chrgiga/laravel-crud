@@ -62,19 +62,35 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6 col-md-offset-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <textarea name="work_functions"
                                                   class="form-control input-sm"
                                                   placeholder="Work functions">{{$user->work_functions}}</textarea>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select name="departments[]"
+                                                multiple
+                                                class="form-control input-sm"
+                                                placeholder="Departments">
+                                            @foreach($departmentOptions as $option)
+                                                <option {{$option->assigned ? 'selected="selected"' : ''}} value="{{$option->value}}">
+                                                    {{$option->text}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-md-4 col-md-offset-2">
                                     <input type="submit"
                                            value="Update"
                                            class="btn btn-success btn-block">
+                                </div>
+                                <div class="col-md-4">
                                     <a href="{{ route('users.index') }}"
                                        class="btn btn-info btn-block" >Go back</a>
                                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\User;
 use Illuminate\Http\Request;
 use \Illuminate\Contracts\View\Factory;
@@ -30,7 +31,15 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('User.create');
+        $departmentOptions = [];
+
+        foreach(Department::all() as $department) {
+            $departmentOptions[] = (object)[
+                'value' => $department->id,
+                'text' => $department->name
+            ];
+        }
+        return view('User.create', compact('departmentOptions'));
     }
 
     /**
@@ -56,6 +65,12 @@ class UserController extends Controller
             'work_functions' => $request->get('work_functions'),
         ]);
         $user->save();
+
+        foreach($request->get('departments') as $departmentId) {
+            $department = Department::find($departmentId);
+            $user->departments()->save($department);
+        }
+
         return redirect()->route('users.index')->with('success','User created successful');
     }
 
@@ -80,7 +95,16 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return  view('User.edit', compact('user'));
+        $departmentOptions = [];
+
+        foreach(Department::all() as $department) {
+            $departmentOptions[] = (object)[
+                'value' => $department->id,
+                'text' => $department->name,
+                'assigned' => !!$user->departments->find($department->id)
+            ];
+        }
+        return  view('User.edit', compact('user'), compact('departmentOptions'));
     }
 
     /**
@@ -106,6 +130,12 @@ class UserController extends Controller
         $user->work_position = $request->get('work_position');
         $user->work_functions = $request->get('work_functions');
         $user->save();
+        $user->departments()->detach();
+
+        foreach($request->get('departments') as $departmentId) {
+            $department = Department::find($departmentId);
+            $user->departments()->save($department);
+        }
 
         return redirect()->route('users.index')->with('success','User updated successful');
     }

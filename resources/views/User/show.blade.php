@@ -13,6 +13,15 @@
                         <li><strong>Email:</strong> {{$user->email}}</li>
                         <li><strong>Work position:</strong>: {{$user->work_position}}</li>
                         <li><strong>Work functions:</strong> {{$user->work_functions}}</li>
+                        <li><strong>Departments:</strong>
+                            <ul>
+                                @foreach($user->departments->all() as $department)
+                                    @if($department)
+                                        <li><strong>{{$department->name}}</strong>: {{$department->description}}</li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="panel-footer">
