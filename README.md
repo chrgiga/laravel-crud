@@ -18,6 +18,11 @@ Populate database:
 
 ## **Tests**
 
+Before execute tests you must to edit **phpunit.xml** file and set the follow params:
+
+    <server name="DB_CONNECTION" value="your_database_connection"/>
+    <server name="DB_DATABASE" value="your_database_name"/>
+
 Execute tests (for validate main urls status):
 
     vendor/bin/phpunit
